@@ -1,6 +1,6 @@
 {
   "name": "instant-feedback",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "A Clippy-style feedback widget for React applications",
   "main": "dist/index.js",
   "scripts": {
