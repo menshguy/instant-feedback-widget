@@ -32,19 +32,23 @@ const IconWrapper = styled.div`
 `;
 
 const Modal = styled.div`
+  align-items: center;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: white;
-  padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-  width: 90%;
-  z-index: 1000;
+  display: flex;
   font-family: 'Manrope', sans-serif;
   font-size: 20px;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 500px;
+  padding: 20px;
+  width: 90%;
+  z-index: 1000;
 `;
 
 const Overlay = styled.div`
@@ -55,10 +59,6 @@ const Overlay = styled.div`
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Form = styled.form`
@@ -82,14 +82,14 @@ const ThumbButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  font-size: ${props => props.selected ? '20px' : '36px'};
-  opacity: ${props => props.selected ? 1 : 0.25};
+  font-size: ${props => props.selected ? '36px' : '24px'};
+  opacity: ${props => props.selected ? 1 : 0.4};
   transition: opacity 0.2s;
   font-family: 'Manrope', sans-serif;
   
   &:hover {
     font-size: 36px;
-    opacity: 0.5;
+    opacity: 1;
   }
 `;
 
@@ -120,7 +120,7 @@ const TextArea = styled.textarea`
 
 const SubmitButton = styled.button`
   padding: 10px;
-  background: #8ac2ff;
+  background: #278fff;
   color: white;
   border: none;
   border-radius: 4px;
@@ -133,7 +133,7 @@ const SubmitButton = styled.button`
   }
   
   &:hover:not(:disabled) {
-    background: #668fbd;
+    background: #1966b9;
   }
 `;
 
@@ -183,10 +183,7 @@ const FeedbackWidget = ({
   const handleClose = useCallback(() => {
     setIsOpen(false);
     setSentiment(null);
-    if (state && state.succeeded && typeof state.reset === 'function') {
-      state.reset();
-    }
-  }, [state]);
+  }, []);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -204,7 +201,7 @@ const FeedbackWidget = ({
     handleSubmit(formObject);
   };
 
-  if (state.succeeded) {
+  if (state.succeeded && isOpen) {
     return (
       <React.Fragment>
         <Overlay onClick={handleClose} />
