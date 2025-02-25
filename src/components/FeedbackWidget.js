@@ -184,8 +184,13 @@ const FeedbackWidget = ({
   const handleClose = useCallback(() => {
     setIsOpen(false);
     setSentiment(null);
-    state.reset();
-  }, [state]);
+    
+    // Reset form fields
+    const form = document.getElementById("feedback-form");
+    if (form) {
+      form.reset();
+    }
+  }, []);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -231,7 +236,7 @@ const FeedbackWidget = ({
           <Modal onClick={e => e.stopPropagation()}>
             <CloseButton onClick={() => setIsOpen(false)}>×</CloseButton>
             <h2>{label}</h2>
-            <Form onSubmit={handleFormSubmit}>
+            <Form id="feedback-form" onSubmit={handleFormSubmit}>
               <ThumbsContainer>
                 <ThumbButton
                   type="button"
