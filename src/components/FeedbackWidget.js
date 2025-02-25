@@ -67,6 +67,7 @@ const Form = styled.form`
   gap: 15px;
   font-family: 'Manrope', sans-serif;
   font-size: 20px;
+  width: 100%;
 `;
 
 const ThumbsContainer = styled.div`
@@ -82,13 +83,13 @@ const ThumbButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  font-size: ${props => props.selected ? '36px' : '24px'};
+  font-size: ${props => props.selected ? '28px' : '24px'};
   opacity: ${props => props.selected ? 1 : 0.4};
   transition: opacity 0.2s;
   font-family: 'Manrope', sans-serif;
   
   &:hover {
-    font-size: 36px;
+    font-size: 28px;
     opacity: 1;
   }
 `;
@@ -97,7 +98,7 @@ const Input = styled.input`
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  background-color: white !important;
+  background-color: white;
   border: 1px solid #ddd;
   border-radius: 4px;
   color: black;
@@ -163,9 +164,6 @@ const FeedbackWidget = ({
   prefillEmail = "",
   formId
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [sentiment, setSentiment] = useState(null);
-  
   // Check if formId is provided - required
   if (!formId) {
     console.error('FeedbackWidget Error: formId prop is required. The widget will be disabled.');
@@ -178,12 +176,16 @@ const FeedbackWidget = ({
     return null;
   }
 
+  // State
+  const [isOpen, setIsOpen] = useState(false);
+  const [sentiment, setSentiment] = useState(null);
   const [state, handleSubmit] = useForm(formId);
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
     setSentiment(null);
-  }, []);
+    state.reset();
+  }, [state]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
