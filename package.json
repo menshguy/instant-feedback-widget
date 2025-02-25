@@ -1,0 +1,36 @@
+{
+  "name": "instant-feedback",
+  "version": "2.0.3",
+  "description": "A Clippy-style feedback widget for React applications",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "prepare": "npm run build"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "dependencies": {
+    "@formspree/react": "^2.5.1",
+    "styled-components": "^6.1.8"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-react": "^7.23.3",
+    "babel-loader": "^9.1.3",
+    "webpack": "^5.90.1",
+    "webpack-cli": "^5.1.4",
+    "css-loader": "^6.10.0",
+    "style-loader": "^3.3.4"
+  },
+  "keywords": [
+    "react",
+    "feedback",
+    "widget",
+    "clippy"
+  ],
+  "author": "",
+  "license": "MIT"
+}
