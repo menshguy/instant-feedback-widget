@@ -55,6 +55,10 @@ const Overlay = styled.div`
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Form = styled.form`
@@ -94,8 +98,12 @@ const Input = styled.input`
   border: 1px solid #ddd;
   border-radius: 4px;
   background-color: white !important;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: black;
   font-family: 'Manrope', sans-serif;
   font-size: 20px;
+  padding: 8px;
 `;
 
 const TextArea = styled.textarea`
@@ -174,7 +182,8 @@ const FeedbackWidget = ({
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
-    if (state.succeeded) {
+    setSentiment(null);
+    if (state && state.succeeded && typeof state.reset === 'function') {
       state.reset();
     }
   }, [state]);
@@ -197,14 +206,14 @@ const FeedbackWidget = ({
 
   if (state.succeeded) {
     return (
-      <>
+      <React.Fragment>
         <Overlay onClick={handleClose} />
         <Modal onClick={e => e.stopPropagation()}>
           <CloseButton onClick={handleClose}>×</CloseButton>
           <h2>Thank you for your feedback!</h2>
           <SubmitButton type="button" onClick={handleClose}>Close</SubmitButton>
         </Modal>
-      </>
+      </React.Fragment>
     );
   }
 
@@ -228,14 +237,14 @@ const FeedbackWidget = ({
                 <ThumbButton
                   type="button"
                   onClick={() => setSentiment('positive 👍')}
-                  selected={sentiment === 'positive'}
+                  selected={sentiment === 'positive 👍'}
                 >
                   👍
                 </ThumbButton>
                 <ThumbButton
                   type="button"
                   onClick={() => setSentiment('negative 👎')}
-                  selected={sentiment === 'negative'}
+                  selected={sentiment === 'negative 👎'}
                 >
                   👎
                 </ThumbButton>
